@@ -5,57 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>線上預約 | 髮型工作室</title>
-  <meta name="description" content="輕鬆預約您的專屬髮型服務，選擇日期與時段即可完成預約。">
+  <meta name="description" content="輕鬆預約您的專屬髮型服務">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
     rel="stylesheet">
   <style>
-    /* ── Reset & Base ─────────────────────────────── */
     *,
     *::before,
     *::after {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      box-sizing: border-box
     }
 
     :root {
-      --bg-primary: #0f0f1a;
-      --bg-secondary: #1a1a2e;
-      --bg-card: #16213e;
-      --bg-glass: rgba(22, 33, 62, 0.7);
+      --bg: #0f0f1a;
+      --bg2: #1a1a2e;
+      --card: #16213e;
+      --glass: rgba(22, 33, 62, .7);
       --accent: #00d2ff;
-      --accent-hover: #00b4d8;
-      --accent-glow: rgba(0, 210, 255, 0.25);
-      --gradient: linear-gradient(135deg, #00d2ff 0%, #7b2ff7 100%);
-      --text-primary: #e2e8f0;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --border: rgba(148, 163, 184, 0.12);
-      --success: #22c55e;
-      --error: #ef4444;
-      --warning: #f59e0b;
-      --radius: 14px;
-      --radius-sm: 10px;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --accent-h: rgba(0, 210, 255, .25);
+      --grad: linear-gradient(135deg, #00d2ff, #7b2ff7);
+      --t1: #e2e8f0;
+      --t2: #94a3b8;
+      --t3: #64748b;
+      --border: rgba(148, 163, 184, .12);
+      --ok: #22c55e;
+      --err: #ef4444;
+      --warn: #f59e0b;
+      --r: 14px;
+      --rs: 10px;
     }
 
     html {
-      font-size: 16px;
+      font-size: 16px
     }
 
     body {
       font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      background: var(--bg);
+      color: var(--t1);
       min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased
     }
 
-    /* ── Ambient Background ──────────────────────── */
     body::before {
       content: '';
       position: fixed;
@@ -63,9 +58,8 @@
       left: -20%;
       width: 80vw;
       height: 80vw;
-      background: radial-gradient(circle, rgba(0, 210, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      background: radial-gradient(circle, rgba(0, 210, 255, .08) 0%, transparent 70%);
+      pointer-events: none
     }
 
     body::after {
@@ -75,24 +69,22 @@
       right: -20%;
       width: 70vw;
       height: 70vw;
-      background: radial-gradient(circle, rgba(123, 47, 247, 0.06) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      background: radial-gradient(circle, rgba(123, 47, 247, .06) 0%, transparent 70%);
+      pointer-events: none
     }
 
-    /* ── Layout ──────────────────────────────────── */
     .app {
       position: relative;
       z-index: 1;
-      max-width: 480px;
+      max-width: 460px;
       margin: 0 auto;
-      padding: 0 16px 40px;
+      padding: 0 16px 40px
     }
 
-    /* ── Header ──────────────────────────────────── */
+    /* Header */
     .header {
       text-align: center;
-      padding: 32px 0 24px;
+      padding: 32px 0 20px
     }
 
     .header__icon {
@@ -102,477 +94,285 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: var(--gradient);
+      background: var(--grad);
       font-size: 28px;
       margin-bottom: 14px;
-      box-shadow: 0 4px 24px var(--accent-glow);
+      box-shadow: 0 4px 24px var(--accent-h)
     }
 
     .header__title {
       font-size: 1.5rem;
       font-weight: 700;
-      background: var(--gradient);
+      background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background-clip: text
     }
 
-    .header__subtitle {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-top: 6px;
+    .header__sub {
+      font-size: .85rem;
+      color: var(--t2);
+      margin-top: 4px
     }
 
-    /* ── Progress Steps ──────────────────────────── */
-    .steps {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-
-    .steps__dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--text-muted);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .steps__dot.active {
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
-      transform: scale(1.3);
-    }
-
-    .steps__dot.done {
-      background: var(--success);
-    }
-
-    /* ── Card ─────────────────────────────────────── */
+    /* Card */
     .card {
-      background: var(--bg-glass);
+      background: var(--glass);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--r);
       padding: 24px 20px;
-      box-shadow: var(--shadow);
-      animation: fadeUp 0.5s ease-out;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      animation: fadeUp .5s ease-out
     }
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(16px);
+        transform: translateY(16px)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0)
       }
     }
 
-    .card__title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text-primary);
+    /* Form */
+    .fg {
+      margin-bottom: 18px
     }
 
-    .card__desc {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-    }
-
-    /* ── Section (each step) ──────────────────────── */
-    .section {
-      display: none;
-    }
-
-    .section.active {
+    .fg label {
       display: block;
-    }
-
-    /* ── Date Grid ────────────────────────────────── */
-    .date-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 10px;
-    }
-
-    .date-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 12px 6px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: all 0.25s ease;
-      font-family: inherit;
-    }
-
-    .date-btn:hover {
-      border-color: var(--accent);
-      background: rgba(0, 210, 255, 0.08);
-    }
-
-    .date-btn.selected {
-      border-color: var(--accent);
-      background: rgba(0, 210, 255, 0.15);
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-
-    .date-btn__day {
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      margin-bottom: 4px;
-    }
-
-    .date-btn__num {
-      font-size: 1.15rem;
-      font-weight: 600;
-    }
-
-    .date-btn__month {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ── Time Slots ───────────────────────────────── */
-    .slot-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .slot-btn {
-      padding: 14px 10px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      font-family: inherit;
-      font-size: 0.9rem;
+      font-size: .8rem;
       font-weight: 500;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: center;
+      color: var(--t2);
+      margin-bottom: 8px
     }
 
-    .slot-btn:hover {
-      border-color: var(--accent);
-      background: rgba(0, 210, 255, 0.08);
-    }
-
-    .slot-btn.selected {
-      border-color: var(--accent);
-      background: rgba(0, 210, 255, 0.15);
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-
-    /* ── Service Items ────────────────────────────── */
-    .service-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .service-btn {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--bg-secondary);
-      cursor: pointer;
-      transition: all 0.25s ease;
-      font-family: inherit;
-    }
-
-    .service-btn:hover {
-      border-color: var(--accent);
-      background: rgba(0, 210, 255, 0.08);
-    }
-
-    .service-btn.selected {
-      border-color: var(--accent);
-      background: rgba(0, 210, 255, 0.15);
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-
-    .service-btn__name {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .service-btn__price {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    /* ── Form Input ───────────────────────────────── */
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .form-group input {
+    .fg input,
+    .fg select {
       width: 100%;
       padding: 13px 16px;
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
+      border-radius: var(--rs);
+      background: var(--bg2);
+      color: var(--t1);
       font-family: inherit;
-      font-size: 0.95rem;
-      transition: border-color 0.3s;
+      font-size: .95rem;
       outline: none;
+      transition: border-color .3s;
+      appearance: none;
+      -webkit-appearance: none
     }
 
-    .form-group input:focus {
+    .fg select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6.5 6 6.5-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px
+    }
+
+    .fg input:focus,
+    .fg select:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
+      box-shadow: 0 0 0 3px var(--accent-h)
     }
 
-    .form-group input::placeholder {
-      color: var(--text-muted);
+    .fg input::placeholder {
+      color: var(--t3)
     }
 
-    /* ── Summary ──────────────────────────────────── */
-    .summary {
-      border-radius: var(--radius-sm);
-      overflow: hidden;
+    .fg select option {
+      background: var(--bg2);
+      color: var(--t1)
     }
 
-    .summary__row {
+    .fg select option:disabled {
+      color: var(--t3)
+    }
+
+    /* Price tag */
+    .price-tag {
+      margin-top: 14px;
       display: flex;
       justify-content: space-between;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
+      align-items: center;
+      padding: 14px 18px;
+      border-radius: var(--rs);
+      background: rgba(0, 210, 255, .06);
+      border: 1px solid rgba(0, 210, 255, .15)
     }
 
-    .summary__row:last-child {
-      border-bottom: none;
+    .price-tag__label {
+      font-size: .85rem;
+      color: var(--t2)
     }
 
-    .summary__label {
-      color: var(--text-secondary);
-    }
-
-    .summary__value {
-      color: var(--text-primary);
-      font-weight: 500;
-      text-align: right;
-    }
-
-    .summary__total {
-      display: flex;
-      justify-content: space-between;
-      padding: 16px 0 0;
-      margin-top: 4px;
-      border-top: 2px solid var(--accent);
-      font-size: 1rem;
-    }
-
-    .summary__total .summary__value {
+    .price-tag__value {
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent)
     }
 
-    /* ── Buttons ──────────────────────────────────── */
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
+    /* Button */
     .btn {
-      flex: 1;
-      padding: 14px 20px;
-      border-radius: var(--radius-sm);
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: var(--rs);
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      text-align: center;
-    }
-
-    .btn-primary {
-      background: var(--gradient);
+      transition: all .3s;
+      margin-top: 22px;
+      background: var(--grad);
       color: #fff;
-      box-shadow: 0 4px 16px var(--accent-glow);
+      box-shadow: 0 4px 16px var(--accent-h)
     }
 
-    .btn-primary:hover {
+    .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px var(--accent-glow);
+      box-shadow: 0 6px 24px var(--accent-h)
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
+    .btn:active {
+      transform: translateY(0)
     }
 
-    .btn-primary:disabled {
-      opacity: 0.5;
+    .btn:disabled {
+      opacity: .45;
       cursor: not-allowed;
-      transform: none;
+      transform: none
     }
 
-    .btn-secondary {
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-card);
-      color: var(--text-primary);
-    }
-
-    /* ── Loading Overlay ─────────────────────────── */
-    .loading-overlay {
+    /* Loading */
+    .overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15, 15, 26, 0.85);
+      background: rgba(15, 15, 26, .85);
       backdrop-filter: blur(8px);
       z-index: 999;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px
     }
 
-    .loading-overlay.show {
-      display: flex;
+    .overlay.show {
+      display: flex
     }
 
     .spinner {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border: 3px solid var(--border);
       border-top-color: var(--accent);
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      animation: spin .8s linear infinite
     }
 
     @keyframes spin {
       to {
-        transform: rotate(360deg);
+        transform: rotate(360deg)
       }
     }
 
-    .loading-text {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
+    .overlay p {
+      font-size: .9rem;
+      color: var(--t2)
     }
 
-    /* ── Success Screen ──────────────────────────── */
-    .success-screen {
+    /* Success */
+    .success {
       display: none;
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px 20px
     }
 
-    .success-screen.show {
-      display: block;
+    .success.show {
+      display: block
     }
 
-    .success-icon {
+    .success__icon {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: rgba(34, 197, 94, 0.15);
+      background: rgba(34, 197, 94, .15);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 36px;
-      margin-bottom: 20px;
-      animation: popIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 18px;
+      animation: pop .5s cubic-bezier(.4, 0, .2, 1)
     }
 
-    @keyframes popIn {
+    @keyframes pop {
       from {
         transform: scale(0);
-        opacity: 0;
+        opacity: 0
       }
 
       50% {
-        transform: scale(1.2);
+        transform: scale(1.2)
       }
 
       to {
         transform: scale(1);
-        opacity: 1;
+        opacity: 1
       }
     }
 
-    .success-title {
+    .success h2 {
       font-size: 1.3rem;
       font-weight: 700;
-      color: var(--success);
-      margin-bottom: 8px;
+      color: var(--ok);
+      margin-bottom: 8px
     }
 
-    .success-desc {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
+    .success p {
+      font-size: .85rem;
+      color: var(--t2);
+      line-height: 1.6
     }
 
-    /* ── Error Toast ─────────────────────────────── */
+    .success .btn {
+      max-width: 200px;
+      margin: 24px auto 0
+    }
+
+    /* Toast */
     .toast {
       position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: var(--bg-card);
-      border: 1px solid var(--error);
-      color: var(--text-primary);
+      background: var(--card);
+      border: 1px solid var(--err);
+      color: var(--t1);
       padding: 14px 24px;
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      border-radius: var(--rs);
+      font-size: .85rem;
       z-index: 1000;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform .4s cubic-bezier(.4, 0, .2, 1);
       max-width: 90%;
       text-align: center;
-      box-shadow: 0 8px 32px rgba(239, 68, 68, 0.15);
+      box-shadow: 0 8px 32px rgba(239, 68, 68, .15)
     }
 
     .toast.show {
-      transform: translateX(-50%) translateY(0);
+      transform: translateX(-50%) translateY(0)
     }
 
-    /* ── Empty State ─────────────────────────────── */
-    .empty-state {
-      text-align: center;
-      padding: 30px 10px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .empty-state__icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
+    /* Disabled slot label */
+    .slot-occupied {
+      font-size: .7rem;
+      color: var(--err);
+      margin-left: 6px
     }
   </style>
 </head>
@@ -580,90 +380,63 @@
 <body>
 
   <div class="app" id="app">
-    <!-- Header -->
     <header class="header">
       <div class="header__icon">💈</div>
       <h1 class="header__title">髮型工作室</h1>
-      <p class="header__subtitle">線上預約系統</p>
+      <p class="header__sub">線上預約系統</p>
     </header>
 
-    <!-- Progress -->
-    <div class="steps" id="steps">
-      <div class="steps__dot active" data-step="1"></div>
-      <div class="steps__dot" data-step="2"></div>
-      <div class="steps__dot" data-step="3"></div>
-      <div class="steps__dot" data-step="4"></div>
+    <!-- Booking Form -->
+    <div class="card" id="formCard">
+      <div class="fg">
+        <label for="date">📅 選擇日期</label>
+        <input type="date" id="date">
+      </div>
+
+      <div class="fg">
+        <label for="time">⏰ 選擇時段</label>
+        <select id="time" disabled>
+          <option value="">請先選擇日期</option>
+        </select>
+      </div>
+
+      <div class="fg">
+        <label for="service">💇 服務項目</label>
+        <select id="service">
+          <option value="">請選擇服務</option>
+          <option value="剪髮">剪髮 — $300</option>
+          <option value="剪+洗">剪+洗 — $400</option>
+          <option value="染髮">染髮 — $1500</option>
+          <option value="燙髮">燙髮 — $2000</option>
+        </select>
+      </div>
+
+      <div class="fg">
+        <label for="name">👤 您的稱呼</label>
+        <input type="text" id="name" placeholder="請輸入您的稱呼" maxlength="20" autocomplete="name">
+      </div>
+
+      <div class="price-tag" id="priceTag" style="display:none">
+        <span class="price-tag__label">💰 預估金額</span>
+        <span class="price-tag__value" id="priceValue">$0</span>
+      </div>
+
+      <button class="btn" id="btnSubmit" disabled>送出預約</button>
     </div>
 
-    <!-- Step 1: 選日期 -->
-    <section class="section active card" id="step1">
-      <h2 class="card__title">📅 選擇日期</h2>
-      <p class="card__desc">請選擇您希望的預約日期</p>
-      <div class="date-grid" id="dateGrid"></div>
-      <div class="btn-row">
-        <button class="btn btn-primary" id="btnToStep2" disabled>下一步</button>
-      </div>
-    </section>
-
-    <!-- Step 2: 選時段 -->
-    <section class="section card" id="step2">
-      <h2 class="card__title">⏰ 選擇時段</h2>
-      <p class="card__desc">以下為 <span id="selectedDateLabel">—</span> 的可預約時段</p>
-      <div id="slotContainer">
-        <div class="slot-grid" id="slotGrid"></div>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBackTo1">上一步</button>
-        <button class="btn btn-primary" id="btnToStep3" disabled>下一步</button>
-      </div>
-    </section>
-
-    <!-- Step 3: 選服務 & 填資料 -->
-    <section class="section card" id="step3">
-      <h2 class="card__title">💇 選擇服務</h2>
-      <p class="card__desc">請選擇服務項目並填寫您的稱呼</p>
-      <div class="service-grid" id="serviceGrid"></div>
-      <div style="margin-top: 20px;">
-        <div class="form-group">
-          <label for="customerName">您的稱呼 *</label>
-          <input type="text" id="customerName" placeholder="請輸入您的稱呼" maxlength="20" autocomplete="name">
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBackTo2">上一步</button>
-        <button class="btn btn-primary" id="btnToStep4" disabled>下一步</button>
-      </div>
-    </section>
-
-    <!-- Step 4: 確認送出 -->
-    <section class="section card" id="step4">
-      <h2 class="card__title">✅ 確認預約</h2>
-      <p class="card__desc">請確認以下預約資訊</p>
-      <div class="summary" id="summary"></div>
-      <div class="btn-row">
-        <button class="btn btn-secondary" id="btnBackTo3">上一步</button>
-        <button class="btn btn-primary" id="btnSubmit">確認預約</button>
-      </div>
-    </section>
-
     <!-- Success -->
-    <section class="success-screen card" id="successScreen">
-      <div class="success-icon">✅</div>
-      <h2 class="success-title">預約成功！</h2>
-      <p class="success-desc">
-        您的預約已確認，請留意 LINE 通知。<br>
-        如需取消或變更，請直接聯繫店家。
-      </p>
-      <div class="btn-row" style="justify-content:center; margin-top: 28px;">
-        <button class="btn btn-primary" id="btnClose" style="max-width: 200px;">關閉</button>
-      </div>
-    </section>
+    <div class="card success" id="successScreen">
+      <div class="success__icon">✅</div>
+      <h2>預約成功！</h2>
+      <p>已收到您的預約，請留意 LINE 通知。<br>如需取消或變更，請直接聯繫店家。</p>
+      <button class="btn" id="btnClose">關閉</button>
+    </div>
   </div>
 
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loadingOverlay">
+  <!-- Loading -->
+  <div class="overlay" id="overlay">
     <div class="spinner"></div>
-    <div class="loading-text" id="loadingText">載入中...</div>
+    <p id="overlayText">載入中...</p>
   </div>
 
   <!-- Toast -->
@@ -674,274 +447,181 @@
 
   <script>
     // ── 設定 ──────────────────────────────────────────────────
-    const CONFIG = {
-      LIFF_ID: '2009350844-GYuPdJgB',
-      GAS_URL: 'https://script.google.com/macros/s/AKfycbwjxnRHUtRyxEL1gRA9r-VO3ZXh-bttQE6PEn6wObmvb-uERbrv8HT_0JfYybcikKC3kg/exec',
-      DAYS_AHEAD: 14
-    };
+    var GAS_URL = 'https://script.google.com/macros/s/AKfycbwjxnRHUtRyxEL1gRA9r-VO3ZXh-bttQE6PEn6wObmvb-uERbrv8HT_0JfYybcikKC3kg/exec';
+    var LIFF_ID = '2009350844-GYuPdJgB';
 
-    // ── 服務選單（前端渲染用，與後端 SERVICE_MENU 同步）───────
-    const SERVICE_MENU = {
-      '剪髮': 300,
-      '剪+洗': 400,
-      '染髮': 1500,
-      '燙髮': 2000
-    };
+    var PRICES = { '剪髮': 300, '剪+洗': 400, '染髮': 1500, '燙髮': 2000 };
+    var ALL_SLOTS = ['10:00', '11:00', '13:00', '15:00'];
 
-    // ── 全域狀態 ──────────────────────────────────────────────
-    const state = {
-      lineUid: '',
-      displayName: '',
-      selectedDate: '',
-      selectedTime: '',
-      selectedService: '',
-      currentStep: 1
-    };
-
-    // ── 星期名稱 ─────────────────────────────────────────────
-    const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'];
-    const MONTHS = ['1月', '2月', '3月', '4月', '5月', '6月',
-      '7月', '8月', '9月', '10月', '11月', '12月'];
-
+    var lineUid = '';
+    var displayName = '';
 
     // ============================================================
     //  初始化
     // ============================================================
-    document.addEventListener('DOMContentLoaded', async function () {
-      showLoading('初始化中...');
-
-      try {
-        // LIFF 初始化
-        await liff.init({ liffId: CONFIG.LIFF_ID });
-
-        if (!liff.isLoggedIn()) {
-          liff.login();
-          return;
-        }
-
-        const profile = await liff.getProfile();
-        state.lineUid = profile.userId;
-        state.displayName = profile.displayName;
-
-        // 預填姓名
-        document.getElementById('customerName').value = state.displayName;
-
-      } catch (err) {
-        console.warn('LIFF init failed, running in dev mode:', err.message);
-        state.lineUid = 'dev_user_id';
-        state.displayName = '測試用戶';
-        document.getElementById('customerName').value = state.displayName;
-      }
-
-      // 渲染日期選擇器
-      renderDateGrid();
-
-      // 渲染服務選單
-      renderServiceGrid();
-
-      // 綁定按鈕事件
+    document.addEventListener('DOMContentLoaded', function () {
+      initLiff();
+      initDatePicker();
       bindEvents();
-
-      hideLoading();
     });
 
-
-    // ============================================================
-    //  日期選擇器
-    // ============================================================
-    function renderDateGrid() {
-      const grid = document.getElementById('dateGrid');
-      grid.innerHTML = '';
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      for (let i = 0; i < CONFIG.DAYS_AHEAD; i++) {
-        const d = new Date(today);
-        d.setDate(today.getDate() + i);
-
-        const dateStr = formatDate(d);
-        const dayName = WEEKDAYS[d.getDay()];
-        const monthName = MONTHS[d.getMonth()];
-
-        const btn = document.createElement('button');
-        btn.className = 'date-btn';
-        btn.dataset.date = dateStr;
-        btn.innerHTML =
-          '<span class="date-btn__day">週' + dayName + '</span>' +
-          '<span class="date-btn__num">' + d.getDate() + '</span>' +
-          '<span class="date-btn__month">' + monthName + '</span>';
-
-        btn.addEventListener('click', function () {
-          document.querySelectorAll('.date-btn').forEach(function (b) { b.classList.remove('selected'); });
-          btn.classList.add('selected');
-          state.selectedDate = dateStr;
-          document.getElementById('btnToStep2').disabled = false;
-        });
-
-        grid.appendChild(btn);
+    async function initLiff() {
+      try {
+        await liff.init({ liffId: LIFF_ID });
+        if (!liff.isLoggedIn()) { liff.login(); return; }
+        var profile = await liff.getProfile();
+        lineUid = profile.userId;
+        displayName = profile.displayName;
+        document.getElementById('name').value = displayName;
+      } catch (err) {
+        console.warn('LIFF dev mode:', err.message);
+        lineUid = 'dev_user';
+        displayName = '測試用戶';
+        document.getElementById('name').value = displayName;
       }
     }
 
+    // ============================================================
+    //  日期選擇器（限今日起 14 天）
+    // ============================================================
+    function initDatePicker() {
+      var input = document.getElementById('date');
+      var today = new Date();
+      var maxDate = new Date(today);
+      maxDate.setDate(today.getDate() + 14);
+      input.min = fmtDate(today);
+      input.max = fmtDate(maxDate);
+    }
 
     // ============================================================
-    //  時段選擇器
+    //  日期 change → AJAX 查詢可用時段
     // ============================================================
-    async function renderSlotGrid() {
-      const grid = document.getElementById('slotGrid');
-      const container = document.getElementById('slotContainer');
-      grid.innerHTML = '';
-      state.selectedTime = '';
-      document.getElementById('btnToStep3').disabled = true;
+    function onDateChange() {
+      var dateVal = document.getElementById('date').value;
+      var sel = document.getElementById('time');
 
-      showLoading('查詢可用時段...');
+      if (!dateVal) {
+        sel.innerHTML = '<option value="">請先選擇日期</option>';
+        sel.disabled = true;
+        validate();
+        return;
+      }
 
-      try {
-        const url = CONFIG.GAS_URL +
-          '?action=getSlots&date=' + encodeURIComponent(state.selectedDate);
+      // 鎖定送出按鈕
+      document.getElementById('btnSubmit').disabled = true;
+      sel.innerHTML = '<option value="">查詢中...</option>';
+      sel.disabled = true;
 
-        const res = await fetch(url);
-        const data = await res.json();
+      fetch(GAS_URL + '?action=getAvailableTimes&date=' + encodeURIComponent(dateVal))
+        .then(function (r) { return r.json(); })
+        .then(function (bookedTimes) {
+          renderTimeOptions(bookedTimes);
+        })
+        .catch(function (err) {
+          console.error('getAvailableTimes error:', err);
+          sel.innerHTML = '<option value="">載入失敗，請重試</option>';
+          showToast('無法查詢時段，請稍後再試');
+        });
+    }
 
-        hideLoading();
+    // ============================================================
+    //  渲染時段選單（disabled 已佔用）
+    // ============================================================
+    function renderTimeOptions(bookedTimes) {
+      var sel = document.getElementById('time');
+      sel.innerHTML = '<option value="">請選擇時段</option>';
 
-        if (!data.slots || data.slots.length === 0) {
-          container.innerHTML =
-            '<div class="empty-state">' +
-            '<div class="empty-state__icon">😔</div>' +
-            '<p>' + (data.message || '該日期暫無可預約時段') + '</p>' +
-            '</div>';
-          return;
+      var hasAvailable = false;
+
+      ALL_SLOTS.forEach(function (slot) {
+        var opt = document.createElement('option');
+        opt.value = slot;
+
+        if (bookedTimes.indexOf(slot) !== -1) {
+          opt.textContent = slot + '  ⛔ 已預約';
+          opt.disabled = true;
+        } else {
+          opt.textContent = slot;
+          hasAvailable = true;
         }
 
-        // 確保 grid 在 container 中
-        container.innerHTML = '';
-        container.appendChild(grid);
-
-        data.slots.forEach(function (slot) {
-          const btn = document.createElement('button');
-          btn.className = 'slot-btn';
-          btn.textContent = slot.label;
-          btn.dataset.value = slot.value;
-
-          btn.addEventListener('click', function () {
-            document.querySelectorAll('.slot-btn').forEach(function (b) { b.classList.remove('selected'); });
-            btn.classList.add('selected');
-            state.selectedTime = slot.value;
-            document.getElementById('btnToStep3').disabled = false;
-          });
-
-          grid.appendChild(btn);
-        });
-
-      } catch (err) {
-        hideLoading();
-        showToast('無法載入時段，請稍後再試');
-        console.error('getSlots error:', err);
-      }
-    }
-
-
-    // ============================================================
-    //  服務選單
-    // ============================================================
-    function renderServiceGrid() {
-      const grid = document.getElementById('serviceGrid');
-      grid.innerHTML = '';
-
-      Object.keys(SERVICE_MENU).forEach(function (name) {
-        const price = SERVICE_MENU[name];
-
-        const btn = document.createElement('button');
-        btn.className = 'service-btn';
-        btn.dataset.service = name;
-        btn.innerHTML =
-          '<span class="service-btn__name">' + name + '</span>' +
-          '<span class="service-btn__price">$' + price + '</span>';
-
-        btn.addEventListener('click', function () {
-          document.querySelectorAll('.service-btn').forEach(function (b) { b.classList.remove('selected'); });
-          btn.classList.add('selected');
-          state.selectedService = name;
-          validateStep3();
-        });
-
-        grid.appendChild(btn);
+        sel.appendChild(opt);
       });
+
+      sel.disabled = false;
+
+      if (!hasAvailable) {
+        sel.innerHTML = '<option value="">該日期已無可預約時段</option>';
+        sel.disabled = true;
+      }
+
+      validate();
     }
 
+    // ============================================================
+    //  服務選擇 → 顯示價格
+    // ============================================================
+    function onServiceChange() {
+      var service = document.getElementById('service').value;
+      var tag = document.getElementById('priceTag');
 
-    // ============================================================
-    //  驗證步驟 3
-    // ============================================================
-    function validateStep3() {
-      const nameVal = document.getElementById('customerName').value.trim();
-      const enabled = state.selectedService && nameVal.length > 0;
-      document.getElementById('btnToStep4').disabled = !enabled;
+      if (service && PRICES[service]) {
+        document.getElementById('priceValue').textContent = '$' + PRICES[service];
+        tag.style.display = 'flex';
+      } else {
+        tag.style.display = 'none';
+      }
+
+      validate();
     }
 
-
     // ============================================================
-    //  確認摘要
+    //  表單驗證
     // ============================================================
-    function renderSummary() {
-      const summary = document.getElementById('summary');
-      const price = SERVICE_MENU[state.selectedService] || 0;
-      const nameVal = document.getElementById('customerName').value.trim();
-
-      summary.innerHTML =
-        '<div class="summary__row">' +
-        '  <span class="summary__label">👤 顧客姓名</span>' +
-        '  <span class="summary__value">' + escapeHtml(nameVal) + '</span>' +
-        '</div>' +
-        '<div class="summary__row">' +
-        '  <span class="summary__label">📅 預約日期</span>' +
-        '  <span class="summary__value">' + state.selectedDate + '</span>' +
-        '</div>' +
-        '<div class="summary__row">' +
-        '  <span class="summary__label">⏰ 預約時段</span>' +
-        '  <span class="summary__value">' + state.selectedTime + '</span>' +
-        '</div>' +
-        '<div class="summary__row">' +
-        '  <span class="summary__label">💇 服務項目</span>' +
-        '  <span class="summary__value">' + state.selectedService + '</span>' +
-        '</div>' +
-        '<div class="summary__total">' +
-        '  <span class="summary__label">💰 預估金額</span>' +
-        '  <span class="summary__value">$' + price + '</span>' +
-        '</div>';
+    function validate() {
+      var d = document.getElementById('date').value;
+      var t = document.getElementById('time').value;
+      var s = document.getElementById('service').value;
+      var n = document.getElementById('name').value.trim();
+      document.getElementById('btnSubmit').disabled = !(d && t && s && n);
     }
 
-
     // ============================================================
-    //  提交預約
+    //  送出預約 (POST)
     // ============================================================
     async function submitBooking() {
-      const nameVal = document.getElementById('customerName').value.trim();
+      var date = document.getElementById('date').value;
+      var time = document.getElementById('time').value;
+      var service = document.getElementById('service').value;
+      var name = document.getElementById('name').value.trim();
 
-      if (!state.selectedDate || !state.selectedTime || !state.selectedService || !nameVal) {
+      if (!date || !time || !service || !name) {
         showToast('請完整填寫所有欄位');
         return;
       }
 
-      showLoading('正在預約中...');
+      showOverlay('正在預約中...');
       document.getElementById('btnSubmit').disabled = true;
 
       try {
-        const params = new URLSearchParams({
+        var payload = {
           action: 'book',
-          lineUid: state.lineUid,
-          customerName: nameVal,
-          bookingDate: state.selectedDate,
-          bookingTime: state.selectedTime,
-          serviceItem: state.selectedService
+          uid: lineUid,
+          name: name,
+          date: date,
+          time: time,
+          service: service
+          // 不傳價格，由伺服器端計算
+        };
+
+        var res = await fetch(GAS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
         });
 
-        const url = CONFIG.GAS_URL + '?' + params.toString();
-        const res = await fetch(url);
-        const data = await res.json();
-
-        hideLoading();
+        var data = await res.json();
+        hideOverlay();
 
         if (data.success) {
           showSuccess();
@@ -949,140 +629,59 @@
           showToast(data.message || '預約失敗，請稍後再試');
           document.getElementById('btnSubmit').disabled = false;
         }
-
       } catch (err) {
-        hideLoading();
+        hideOverlay();
         showToast('網路錯誤，請稍後再試');
         document.getElementById('btnSubmit').disabled = false;
         console.error('submitBooking error:', err);
       }
     }
 
-
-    // ============================================================
-    //  步驟導航
-    // ============================================================
-    function goToStep(step) {
-      state.currentStep = step;
-
-      // 隱藏所有 section
-      document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
-
-      // 顯示目標 section
-      var target = document.getElementById('step' + step);
-      if (target) {
-        target.classList.remove('active');
-        // 觸發重新動畫
-        void target.offsetWidth;
-        target.classList.add('active');
-      }
-
-      // 更新進度點
-      document.querySelectorAll('.steps__dot').forEach(function (dot) {
-        var dotStep = parseInt(dot.dataset.step);
-        dot.classList.remove('active', 'done');
-        if (dotStep === step) dot.classList.add('active');
-        else if (dotStep < step) dot.classList.add('done');
-      });
-
-      // 步驟進入時的特殊處理
-      if (step === 2) {
-        document.getElementById('selectedDateLabel').textContent = state.selectedDate;
-        renderSlotGrid();
-      }
-      if (step === 4) {
-        renderSummary();
-      }
-    }
-
-
     // ============================================================
     //  事件綁定
     // ============================================================
     function bindEvents() {
-      // Step 1 → 2
-      document.getElementById('btnToStep2').addEventListener('click', function () {
-        if (state.selectedDate) goToStep(2);
-      });
-
-      // Step 2 → 1
-      document.getElementById('btnBackTo1').addEventListener('click', function () { goToStep(1); });
-
-      // Step 2 → 3
-      document.getElementById('btnToStep3').addEventListener('click', function () {
-        if (state.selectedTime) goToStep(3);
-      });
-
-      // Step 3 → 2
-      document.getElementById('btnBackTo2').addEventListener('click', function () { goToStep(2); });
-
-      // Step 3 → 4
-      document.getElementById('btnToStep4').addEventListener('click', function () {
-        if (state.selectedService && document.getElementById('customerName').value.trim()) goToStep(4);
-      });
-
-      // Step 4 → 3
-      document.getElementById('btnBackTo3').addEventListener('click', function () { goToStep(3); });
-
-      // Submit
+      document.getElementById('date').addEventListener('change', onDateChange);
+      document.getElementById('time').addEventListener('change', validate);
+      document.getElementById('service').addEventListener('change', onServiceChange);
+      document.getElementById('name').addEventListener('input', validate);
       document.getElementById('btnSubmit').addEventListener('click', submitBooking);
-
-      // Close
       document.getElementById('btnClose').addEventListener('click', function () {
         try { liff.closeWindow(); } catch (e) { window.close(); }
       });
-
-      // 姓名輸入驗證
-      document.getElementById('customerName').addEventListener('input', validateStep3);
     }
 
-
     // ============================================================
-    //  成功畫面
+    //  UI 工具
     // ============================================================
     function showSuccess() {
-      document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
-      document.getElementById('steps').style.display = 'none';
-
-      var screen = document.getElementById('successScreen');
-      screen.style.display = 'block';
-      screen.classList.add('show');
+      document.getElementById('formCard').style.display = 'none';
+      var s = document.getElementById('successScreen');
+      s.style.display = 'block';
+      s.classList.add('show');
     }
 
-
-    // ============================================================
-    //  工具函式
-    // ============================================================
-    function showLoading(text) {
-      document.getElementById('loadingText').textContent = text || '載入中...';
-      document.getElementById('loadingOverlay').classList.add('show');
+    function showOverlay(msg) {
+      document.getElementById('overlayText').textContent = msg || '載入中...';
+      document.getElementById('overlay').classList.add('show');
     }
-
-    function hideLoading() {
-      document.getElementById('loadingOverlay').classList.remove('show');
+    function hideOverlay() {
+      document.getElementById('overlay').classList.remove('show');
     }
 
     function showToast(msg) {
-      var toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(function () { toast.classList.remove('show'); }, 3500);
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function () { t.classList.remove('show'); }, 3500);
     }
 
-    function formatDate(d) {
-      var y = d.getFullYear();
-      var m = String(d.getMonth() + 1).padStart(2, '0');
-      var day = String(d.getDate()).padStart(2, '0');
-      return y + '-' + m + '-' + day;
-    }
-
-    function escapeHtml(str) {
-      var div = document.createElement('div');
-      div.textContent = str;
-      return div.innerHTML;
+    function fmtDate(d) {
+      return d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
     }
   </script>
-
 </body>
 
 </html>
