@@ -451,7 +451,17 @@
     var LIFF_ID = '2009350844-GYuPdJgB';
 
     var PRICES = { '剪髮': 300, '剪+洗': 400, '染髮': 1500, '燙髮': 2000 };
-    var ALL_SLOTS = ['10:00', '11:00', '13:00', '15:00'];
+    // 營業時間：週一~六 11-21, 週日 11-18（0=Sun）
+    var BIZ_HOURS = { 0:{s:11,e:18}, 1:{s:11,e:21}, 2:{s:11,e:21}, 3:{s:11,e:21}, 4:{s:11,e:21}, 5:{s:11,e:21}, 6:{s:11,e:21} };
+    function getSlotsForDate(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00+08:00');
+      var biz = BIZ_HOURS[d.getDay()] || { s:11, e:21 };
+      var slots = [];
+      for (var h = biz.s; h < biz.e; h++) {
+        slots.push(String(h).padStart(2,'0') + ':00');
+      }
+      return slots;
+    }
 
     var lineUid = '';
     var displayName = '';
@@ -533,7 +543,10 @@
 
       var hasAvailable = false;
 
-      ALL_SLOTS.forEach(function (slot) {
+      var dateVal = document.getElementById('date').value;
+      var slots = getSlotsForDate(dateVal);
+
+      slots.forEach(function (slot) {
         var opt = document.createElement('option');
         opt.value = slot;
 
