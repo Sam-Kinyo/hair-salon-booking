@@ -604,21 +604,17 @@
       document.getElementById('btnSubmit').disabled = true;
 
       try {
-        var payload = {
-          action: 'booking',
-          uid: lineUid,
-          name: name,
-          date: date,
-          time: time,
+        var params = new URLSearchParams({
+          action:  'booking',
+          uid:     lineUid,
+          name:    name,
+          date:    date,
+          time:    time,
           service: service
           // 不傳價格，由伺服器端計算
-        };
-
-        var res = await fetch(GAS_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
         });
+
+        var res = await fetch(GAS_URL + '?' + params.toString());
 
         var data = await res.json();
         hideOverlay();
